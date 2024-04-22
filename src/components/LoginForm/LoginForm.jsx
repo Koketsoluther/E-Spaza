@@ -29,7 +29,7 @@ function LoginForm() {
             <button type='submit'>Login</button>
             <article className='register-link' >
                 <p>Don't have an account? <a href="https://thumbs.dreamstime.com/b/register-now-concept-button-web-site-hand-holds-wooden-tablet-text-107028457.jpg">Register</a></p>
-            </article >
+            </article>
             
         </form>
 
