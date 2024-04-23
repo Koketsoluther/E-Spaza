@@ -22,7 +22,7 @@ const UserProfile=()=>{
                 {foundUser ? (
                     <h2>Welcome {userrole} {user?.name}</h2>
                 ) : (
-                    <h2>Sorry, you are not part of our database. Call helpline for assistance.</h2>
+                    <h2>Sorry,you are not part of our database. Please call helpline for assistance.</h2>
                 )}
             </article>
         )
