@@ -16,7 +16,7 @@ function App() {
   };
   return (
     <main className='column' style={mainStyle}>
-       <h1>Auth0 Login</h1>
+       <h1> E-spaza Login</h1>
        <LoginButton/>
        <LogoutButton/>
        <UserProfile/>
