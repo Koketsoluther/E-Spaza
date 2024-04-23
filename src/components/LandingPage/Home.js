@@ -16,7 +16,7 @@ const Home = () => {
         </div>
         <div className="home-text-section">
           <h1 className="primary-heading">
-            Your Favourite Shopping Spot!
+            Your Favourite Shopping Spot!!
           </h1>
           <p className="primary-text">
            Life Has Never Been This Easy With Just One Click Into Spaza, 
