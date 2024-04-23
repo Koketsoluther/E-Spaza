@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from 'react';
-const users = [{ email: "siphonkambule@gmail.com", Role: "Shopper" }, { email: "Rendani@gmail.com", Role: "Shopper" }, { email: "iamluther@gmail.com", Role: "Admin" }, { email: "Admin00123@gmail.com", Role: "Admin" }, { email: "iamluther@gmail.com", Role: "Staff" }, { email: "iamluther@gmail.com", Role: "Staff" }];
+const users = [{email: "siphonkambule@gmail.com", Role: "Shopper"},{email: "Rendani@gmail.com", Role: "Shopper"},{email: "iamluther@gmail.com", Role: "Admin"},{email: "Admin00123@gmail.com", Role: "Admin"},{email: "iamluther@gmail.com", Role: "Staff"},{email: "iamluther@gmail.com", Role: "Staff"}];
 let userrole = "";
 const UserProfile = () => {
 
