@@ -12,7 +12,7 @@ describe('UserProfile component', () => {
     const testUser = {
       name: 'Koketso',
       picture: 'https://example.com/test.jpg',
-      'https://my-app.example.com/roles': 'Admin',
+      'https://my-app.example.com/roles': 'Shopper',
     };
     useAuth0.mockReturnValue({ user: testUser, isAuthenticated: true });
 
