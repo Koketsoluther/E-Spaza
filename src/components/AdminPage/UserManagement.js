@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './staffmanagement.css';
 import userDetails from './userdetails';
 
 const UserManagement = () => {
