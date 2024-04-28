@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import BannerBackground from "../Assets/home-banner-background.png";
 import BannerImage from "../Assets/home-banner-image.png";
 import Login from '../LoginForm/LoginButton'
+//import Admin from '../AdminPage/AdminDashboard'
 
 
 
@@ -26,13 +27,16 @@ const Home = () => {
          <p className="primary-text" animate = 'visible'>Ungasali emuva,Joina iSpaza Shopping Nam'hlanje!</p>
           
             <Login/> 
+
          
         </div>
+        
         <div className="home-image-section">
           <img src={BannerImage} alt="" />
         </div>
       </div>
     </div>
+    
   );
 };
 

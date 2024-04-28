@@ -4,13 +4,13 @@ import './components/LandingPage/Home.css'
 // import LoginButton from './components/LoginForm/LoginButton';
 // import LogoutButton from './components/LoginForm/LogoutButton';
 // import UserProfile from './components/UserProfile';
-import Home from './components/LandingPage/Home';
+//import Home from './components/LandingPage/Home';
 // import About from "./Components/About";
 // import Work from "./Components/Work";
 // import Testimonial from "./Components/Testimonial";
 // import Contact from "./Components/Contact";
 // import Footer from "./Components/Footer";
-
+import Admin from './components/AdminPage/AdminDashboard';
 
 function App() {
   
@@ -22,12 +22,9 @@ function App() {
     //   <UserProfile/>
 
       <div className='App'>
-      <Home/>
-      {/* <About />
-      <Work />
-      <Testimonial />
-      <Contact />
-      <Footer /> */}
+     
+      <Admin/>
+      
 
       </div>
     
