@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './admin.css';
 import Dashboard from './Dashboard';
 import UserManagement from './UserManagement';
-import Managestock from './Managestock';
+//import Managestock from './Managestock';
+import Addstaff from './AddStaff';
 
 // Sidebar component
 const Sidebar = ({ setActiveMenu }) => {
-  const menuItems = ['Dashboard', 'User Management', 'Manage stock'];
+  const menuItems = ['Dashboard', 'User Management', 'Add new Staff', 'Manage stock'];
 
   return (
     <div className="sidebar">
@@ -28,12 +29,17 @@ const MainContent = ({ activeMenu }) => {
   switch (activeMenu) {
     case 'Dashboard':
       ContentComponent = Dashboard;
+      //ContentComponent =  () => <div><h2>{activeMenu}</h2><p>This content is not implemented yet.</p></div>;
       break;
     case 'User Management':
-      ContentComponent = UserManagement;
+      ContentComponent= UserManagement;
+      ContentComponent = () => <div><h2>{activeMenu}</h2><p>This content is not implemented yet.</p></div>;
       break;
     case 'Manage stock':
-      ContentComponent = Managestock;
+      ContentComponent = () => <div><h2>{activeMenu}</h2><p>This content is not implemented yet.</p></div>;
+      break;
+    case 'Add new Staff':
+      ContentComponent = Addstaff;
       break;
     default:
       ContentComponent = () => <div><h2>{activeMenu}</h2><p>This content is not implemented yet.</p></div>;

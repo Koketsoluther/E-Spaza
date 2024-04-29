@@ -17,7 +17,7 @@
   
   /* Navbar styles */
   .navbar {
-    background-color: #333;
+    background-color: #60a3bc;
     color: #fff;
     padding: 1rem;
     width: calc(100% - 200px); /* Subtract sidebar width from viewport width */
@@ -28,7 +28,7 @@
   /* Sidebar styles */
   .sidebar {
     width: 200px;
-  background-color: #222;
+  background-color: #60a3bc;
   color: #fff;
   padding: 1rem;
   height: calc(100vh - 60px); /* Subtract navbar height from viewport height */
