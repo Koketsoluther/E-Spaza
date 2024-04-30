@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import './ExploreFood.css';
-
 const ExploreFood = () => {
     const [foodData, setFoodData] = useState([]);
+    const [filteredFoodData, setFilteredFoodData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -14,7 +15,6 @@ const ExploreFood = () => {
                     throw new Error('Failed to fetch food data');
                 }
                 const data = await response.json();
-                console.log(data);
                 setFoodData(data);
                 setLoading(false);
             } catch (error) {
@@ -27,6 +27,18 @@ const ExploreFood = () => {
         fetchFoodData();
     }, []);
 
+    useEffect(() => {
+        // Filter food data based on search query
+        const filteredData = foodData.filter(foodItem =>
+            foodItem.NAME.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredFoodData(filteredData);
+    }, [foodData, searchQuery]);
+
+    const handleSearchInputChange = event => {
+        setSearchQuery(event.target.value);
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -36,22 +48,25 @@ const ExploreFood = () => {
     }
 
     return (
-        <div className="explore-food" id="explore-food">
+        <div className="explore-food" id="explore-food" data-testid="explore-food-component">
             <h1>Explore our food</h1>
+            <input
+                type="text"
+                placeholder="Search for product items"
+                value={searchQuery}
+                onChange={handleSearchInputChange}
+            />
             <section className="explore-food-list">
-                {foodData.map((foodItem, index) => {
+                {filteredFoodData.map((foodItem, index) => {
                     return(
                         <div key={index} className="explore-food-list-item">
                             <img src={foodItem.IMAGE} alt="" />
                             <p>{foodItem.NAME}</p>
                             <p>R{foodItem.PRICE}</p>
 
-                        </div>
-                        
+                        </div>                     
                     )
-                })}
-                
-                    
+                })}   
             </section>
             <hr/>
         </div>

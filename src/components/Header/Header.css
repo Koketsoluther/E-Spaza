@@ -20,6 +20,11 @@
 
 }
 
+.header-contents button a{
+    color: #49557e;
+    text-decoration: none;
+}
+
 .header-contents h2{
     font-weight: 450px;
     color: white;
@@ -39,4 +44,28 @@
     background-color: white;
     font-size: max(1vw, 13px);
     border-radius: 100px;
+}
+
+@media(max-width:1050px) {
+    .header{
+        height: 38vw;
+    }
+
+    .header-contents{
+        max-width: 45%;
+    }
+}
+
+@media(max-width:750px) {
+
+    .header-contents{
+        max-width: 55%;
+    }
+    .header-contents p{
+        display: none;
+    }
+
+    .header-contents button{
+        padding: 2vw 4vw;
+    }
 }
