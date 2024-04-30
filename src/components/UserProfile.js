@@ -13,7 +13,6 @@ const UserProfile=()=>{
 
             </article>
         )
-     
     )
 }
 
