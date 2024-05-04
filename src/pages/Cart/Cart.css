@@ -61,11 +61,30 @@
 }
 
 .cart-total button:hover{
-    background-color: coral;
+    background-color: rgb(218, 50, 20);
 }
 
 @media (max-width:750px){
     .cart-bottom{
         flex-direction: column-reverse;
     }
+}
+
+.cart hr{
+    height: 1px;
+    background-color: #e2e2e2;
+    border:none;
+}
+
+.cart-items-item .cross{
+    cursor: pointer;
+    color: tomato;
+}
+
+@media (max-width: 750px){
+    .cart-bottom{
+        flex-direction: column-reverse;
+    }
+    
+
 }
