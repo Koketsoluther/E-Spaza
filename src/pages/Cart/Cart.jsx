@@ -38,6 +38,9 @@ const Cart=() =>{
                             
                         )
                     }
+                    else{
+                        return null;
+                    }
                 })}
 
             </div>
