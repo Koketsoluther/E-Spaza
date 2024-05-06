@@ -1,14 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './listproduct.css'
 import axios from "axios"
 import {toast} from "react-toastify"
 
 const List = () => {
-    const url = ""
+    const url = "http://localhost:4000"
     const [list,setList] = useState([]);
 
     const fetchList =async () => {
-        const response =await axios.get(`${url}/api/product/list`);
+        const response =await axios.get(`${url}/api/products/list`);
 
         if(response.data.success){
             setList(response.data.data)
@@ -19,7 +19,7 @@ const List = () => {
     }
 
     const removeProduct = async(ProductID) => {
-        const response = await axios.post(`${url}/api/product/remove`,{is:ProductID});
+        const response = await axios.post(`${url}/api/products/remove`,{id:ProductID});
         await fetchList();
         if (response.data.success){
             toast.success(response.data.message)
@@ -45,10 +45,10 @@ const List = () => {
                 {list.map((item,index)=>{
                     return (
                        <div key={index} className='list-table-format'>
-                            <img src={`${url}/images/`+item.image} alt = "" />
-                            <p>{item.name}</p>
-                            <p>{item.category}</p>
-                            <p>${item.price}</p>
+                            <img src={`${url}/images/`+item.IMAGE} alt = "" />
+                            <p>{item.NAME}</p>
+                            <p>{item.CATEGORY}</p>
+                            <p>${item.PRICE}</p>
                             <p onClick={()=>removeProduct(item._id)} className='cursor'>X</p>
                         </div>
                     )
