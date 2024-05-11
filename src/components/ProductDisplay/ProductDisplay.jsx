@@ -10,9 +10,9 @@ const FoodDisplay=({category})=>{
             <h2>Top products near you</h2>
             <div className='product-display-list'>
                 {foodData.map((item,index)=>{
-                    console.log(category,item.category);
+                    console.log(category,item.CATEGORY);
                     if(category==="All" || category===item.category){
-                        return <ProductItem key={index} id={item.id} NAME={item.NAME} PRICE={item.PRICE} IMAGE={item.IMAGE}/>
+                        return <ProductItem key={index} id={item._id} NAME={item.NAME} PRICE={item.PRICE} IMAGE={item.IMAGE}/>
                     }
                     else{
                         return null;

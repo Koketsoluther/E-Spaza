@@ -1,12 +1,11 @@
 import { createContext, useState, useEffect } from "react";
-
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
     const [foodData, setFoodData] = useState([]);
     const [cartItems, setCartItems]= useState({})
-
     const addToCart=(itemId)=>{
+
         if(!cartItems[itemId]){
             setCartItems((prev)=>({...prev,[itemId]:1}));
         }
@@ -20,15 +19,13 @@ const StoreContextProvider = (props) => {
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
 
     }
-    /*useEffect(()=>{
-        console.log(cartItems);
-    },[cartItems])*/
 
     const getTotalCartAmount=()=>{
         let totalAmount=0;
         for(const item in cartItems){
+            console.log(item)
             if(cartItems[item]>0){
-                let itemInfo= foodData.find((product)=> product.id ===item);
+                let itemInfo= foodData.find((product)=> product._id ===item);
                 totalAmount+=itemInfo.PRICE*cartItems[item];
             }
 
@@ -41,19 +38,21 @@ const StoreContextProvider = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://us-central1-e-spazadb.cloudfunctions.net/app/api/items');
+               
+                const response = await fetch("http://localhost:4000/api/products/list");
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                setFoodData(data);
+                console.log(data)
+                setFoodData(data.data);
             } catch (error) {
                 console.error('Error fetching food data:', error);
             }
         };
 
         fetchData();
-    }, []); // Empty dependency array ensures this effect runs only once
+    }, []);
 
     const contextValue = {
         foodData,

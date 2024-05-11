@@ -1,27 +1,36 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Navbar from "../Navbar/Navbar";
+import { StoreContext } from "../../context/StoreContext";
 
-test("Navbar renders without crashing", () => {
-  render(<Navbar />);
-});
 
-test("Navbar renders with correct menu items", () => {
-  const { getByText } = render(<Navbar />);
-  expect(getByText("home")).toBeInTheDocument();
-  expect(getByText("orders")).toBeInTheDocument();
-  expect(getByText("about Us")).toBeInTheDocument();
-  expect(getByText("contact us")).toBeInTheDocument();
-});
+describe("Navbar component", () => {
+  test("renders Navbar with correct links", () => {
+    render(<Navbar />);
+    // Expecting Navbar to render with correct links
+    expect(getByText("home")).toBeInTheDocument();
+    expect(getByText("orders")).toBeInTheDocument();
+    expect(getByText("about Us")).toBeInTheDocument();
+    expect(getByText("contact us")).toBeInTheDocument();
+  });
 
-test("Navbar menu items toggle active class correctly", () => {
-  const { getByText } = render(<Navbar />);
-  fireEvent.click(getByText("orders"));
-  expect(getByText("orders")).toHaveClass("active");
-});
+  test("activates correct menu when link is clicked", () => {
+    render(<Navbar />);
+    fireEvent.click(screen.getByText("orders"));
+    // Expecting "orders" to be the active menu
+    expect(screen.getByText("orders")).toHaveClass("active");
+  });
 
-test("Navbar menu items set menu state correctly", () => {
-  const { getByText } = render(<Navbar />);
-  fireEvent.click(getByText("contact us"));
-  expect(getByText("contact us")).toHaveClass("active");
+  test("displays correct cart total", () => {
+    render(<Navbar />);
+    // Expecting correct cart total to be displayed
+    expect(screen.getByText("2")).toBeInTheDocument();
+  });
+
+  test("renders LoginButton and LogoutButton", () => {
+    render(<Navbar />);
+    // Expecting LoginButton and LogoutButton to be rendered
+    expect(getByText("Login")).toBeInTheDocument();
+    expect(getByText("Logout")).toBeInTheDocument();
+  });
 });

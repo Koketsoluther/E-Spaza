@@ -21,16 +21,17 @@ const Cart=() =>{
                 <br />
                 <hr />
                 {foodData.map((item, index)=>{
-                    if(cartItems[item.id]>0){
+                    if(cartItems[item._id]>0){
+                        
                         return(
                             <div>
                                 <div className="cart-items-title cart-items-item">
-                                <img src={item.IMAGE} alt="" />
+                                <img src={"http://localhost:4000/images/"+item.IMAGE} alt="" />
                                 <p>{item.NAME}</p>
                                 <p>R{item.PRICE}</p>
-                                <p>{cartItems[item.id]}</p>
-                                <p>R{item.PRICE*cartItems[item.id]}</p>
-                                <p onClick={()=>removeFromCart(item.id)}  className="cross">-</p>
+                                <p>{cartItems[item._id]}</p>
+                                <p>R{item.PRICE*cartItems[item._id]}</p>
+                                <p onClick={()=>removeFromCart(item._id)}  className="cross">-</p>
 
                             </div>
                             <hr/>
@@ -57,12 +58,12 @@ const Cart=() =>{
                         <hr/>
                         <div className="cart-total-details">
                             <p>Delivery Fee</p>
-                            <p>R{2}</p>
+                            <p>R{getTotalCartAmount()===0?0:2}</p>
                         </div>
                         <hr/>
                         <div className="cart-total-details">
                             <b>Total</b>
-                            <b>R{getTotalCartAmount()+2}</b>
+                            <b>R{getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
 
                         </div>
                     </div>

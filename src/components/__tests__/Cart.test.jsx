@@ -16,3 +16,7 @@ test("Cart component renders the correct elements", () => {
   expect(getByText("Total")).toBeInTheDocument();
   expect(getByText("Proceed to checkout")).toBeInTheDocument();
 });
+
+
+
+

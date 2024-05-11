@@ -8,7 +8,7 @@ const ProductItem=({id, NAME, PRICE, IMAGE})=>{
     return(
         <div className="product-item">
             <div className="product-item-img-container">
-                <img className="product-item-image" src={IMAGE} alt="" />
+                <img className="product-item-image" src={"http://localhost:4000/images/"+IMAGE} alt="" />
                 {!cartItems[id]
                     ?<img className="add" onClick={()=>addToCart(id)} src={assets.add_icon_white} alt=""/>
                     :<div className="product-item-counter">

@@ -3,6 +3,7 @@ import React from 'react';
 const UserProfile=()=>{
 
     const {user,isAuthenticated}=useAuth0();
+    
     return (
         isAuthenticated && (
         

@@ -7,8 +7,11 @@ import LoginButton from "../LoginForm/LoginButton";
 import LogoutButton from "../LoginForm/LogoutButton";
 import UserProfile from "../UserProfile";
 import { StoreContext } from "../../context/StoreContext";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const Navbar=()=>{
 
+    const { user, isAuthenticated } = useAuth0();
     const [menu,setMenu]= useState("home");
     const {getTotalCartAmount}= useContext(StoreContext)
     return(
