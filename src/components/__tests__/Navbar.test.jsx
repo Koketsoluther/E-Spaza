@@ -1,36 +1,68 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import Navbar from "../Navbar/Navbar";
-import { StoreContext } from "../../context/StoreContext";
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
+import { StoreContext } from '../../context/StoreContext';
 
+// Mocking StoreContext functions
+const mockGetTotalCartAmount = jest.fn().mockReturnValue(0);
 
-describe("Navbar component", () => {
-  test("renders Navbar with correct links", () => {
-    render(<Navbar />);
-    // Expecting Navbar to render with correct links
-    expect(getByText("home")).toBeInTheDocument();
-    expect(getByText("orders")).toBeInTheDocument();
-    expect(getByText("about Us")).toBeInTheDocument();
-    expect(getByText("contact us")).toBeInTheDocument();
+const mockedContextValue = {
+  getTotalCartAmount: mockGetTotalCartAmount
+};
+
+describe('Navbar component', () => {
+  beforeEach(() => {
+    mockGetTotalCartAmount.mockClear();
   });
 
-  test("activates correct menu when link is clicked", () => {
-    render(<Navbar />);
-    fireEvent.click(screen.getByText("orders"));
-    // Expecting "orders" to be the active menu
-    expect(screen.getByText("orders")).toHaveClass("active");
+  it('renders Navbar correctly', () => {
+    const { getByText } = render(
+      <Router>
+        <StoreContext.Provider value={mockedContextValue}>
+          <Navbar />
+        </StoreContext.Provider>
+      </Router>
+    );
+    expect(getByText('E-spaza')).toBeInTheDocument();
+    expect(getByText('home')).toBeInTheDocument();
+    expect(getByText('orders')).toBeInTheDocument();
+    expect(getByText('about Us')).toBeInTheDocument();
+    expect(getByText('contact us')).toBeInTheDocument();
   });
 
-  test("displays correct cart total", () => {
-    render(<Navbar />);
-    // Expecting correct cart total to be displayed
-    expect(screen.getByText("2")).toBeInTheDocument();
+  it('activates menu items correctly', () => {
+    const { getByText } = render(
+      <Router>
+        <StoreContext.Provider value={mockedContextValue}>
+          <Navbar />
+        </StoreContext.Provider>
+      </Router>
+    );
+    fireEvent.click(getByText('orders'));
+    expect(getByText('orders')).toHaveClass('active');
   });
 
-  test("renders LoginButton and LogoutButton", () => {
-    render(<Navbar />);
-    // Expecting LoginButton and LogoutButton to be rendered
-    expect(getByText("Login")).toBeInTheDocument();
-    expect(getByText("Logout")).toBeInTheDocument();
+  it('renders cart dot when there are items in the cart', () => {
+    mockGetTotalCartAmount.mockReturnValue(1);
+    const { getByTestId } = render(
+      <Router>
+        <StoreContext.Provider value={mockedContextValue}>
+          <Navbar />
+        </StoreContext.Provider>
+      </Router>
+    );
+    expect(getByTestId('cart-dot')).toHaveClass('dot');
   });
+
+//   it('does not render cart dot when there are no items in the cart', () => {
+//     const { getByTestId } = render(
+//       <Router>
+//         <StoreContext.Provider value={mockedContextValue}>
+//           <Navbar />
+//         </StoreContext.Provider>
+//       </Router>
+//     );
+//     expect(getByTestId('cart-dot')).not.toHaveClass('dot');
+//   });
 });

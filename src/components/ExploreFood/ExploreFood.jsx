@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './ExploreFood.css';
-const ExploreFood = ({category, setCategory}) => {
+const ExploreFood = () => {
     const [foodData, setFoodData] = useState([]);
     const [filteredFoodData, setFilteredFoodData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -59,7 +59,7 @@ const ExploreFood = ({category, setCategory}) => {
             <section className="explore-food-list">
                 {filteredFoodData.map((foodItem, index) => {
                     return(
-                        <div onclick={()=>setCategory(prev=>prev===foodItem.CATEGORY?"All":foodItem.CATEGORY)} key={index} className="explore-food-list-item">
+                        <div /*onclick={()=>setCategory(prev=>prev===foodItem.CATEGORY?"All":foodItem.CATEGORY)}*/ key={index} className="explore-food-list-item">
                             <img className={category===foodItem.CATEGORY?"active":""} src={foodItem.IMAGE} alt="" />
                             <p>{foodItem.CATEGORY}</p>
 

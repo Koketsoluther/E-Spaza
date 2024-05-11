@@ -1,45 +1,71 @@
-import React from "react";
-import { render, waitFor, fireEvent } from "@testing-library/react";
-import ExploreFood from "../ExploreFood/ExploreFood";
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import ExploreFood from '../ExploreFood/ExploreFood';
 
-// Mocking fetch function
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve([
-      { ID: 1, NAME: "Pizza", PRICE: 10, IMAGE: "pizza.jpg" },
-      { ID: 2, NAME: "Burger", PRICE: 8, IMAGE: "burger.jpg" },
-      // Add more mock data as needed
-    ]),
-  })
-);
+describe('ExploreFood component', () => {
+    test('renders loading state initially', () => {
+        render(<ExploreFood />);
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
+    });
 
-beforeEach(() => {
-  fetch.mockClear();
-});
+    test('renders error message if fetching data fails', async () => {
+        jest.spyOn(global, 'fetch').mockRejectedValueOnce(new Error('Failed to fetch data'));
+        
+        render(<ExploreFood />);
+        
+        await waitFor(() => {
+            expect(screen.getByText('Error: Failed to fetch data')).toBeInTheDocument();
+        });
+    });
 
-test("ExploreFood component renders without crashing", async () => {
-  render(<ExploreFood />);
-});
+    test('renders food items after data is fetched', async () => {
+        const mockFoodData = [
+            { NAME: 'Food 1', CATEGORY: 'Category 1', IMAGE: 'image1.jpg' },
+            { NAME: 'Food 2', CATEGORY: 'Category 2', IMAGE: 'image2.jpg' }
+        ];
+        jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+            ok: true,
+            json: () => Promise.resolve(mockFoodData)
+        });
 
-test("ExploreFood component fetches food data correctly", async () => {
-  render(<ExploreFood />);
-  await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
-});
+        render(<ExploreFood />);
 
-test("ExploreFood component filters food data based on search input", async () => {
-  const { getByPlaceholderText, getByText, getAllByTestId } = render(<ExploreFood />);
-  
-  // Wait for the fetch to complete
-  await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+        
+        expect(screen.getByTestId('explore-food-component')).toBeInTheDocument();
+        expect(screen.queryByText('Loading...')).toBeNull();
+        expect(screen.queryByText('Error: Failed to fetch data')).toBeNull();
+        expect(screen.getAllByRole('listitem')).toHaveLength(2);
+        
+    });
 
-  // Search for 'Pizza'
-  const searchInput = getByPlaceholderText("Search for product items");
-  fireEvent.change(searchInput, { target: { value: "Pizza" } });
+    test('filters food items based on search query', async () => {
+        const mockFoodData = [
+            { NAME: 'Apple', CATEGORY: 'Fruit', IMAGE: 'apple.jpg' },
+            { NAME: 'Banana', CATEGORY: 'Fruit', IMAGE: 'banana.jpg' },
+            { NAME: 'Pizza', CATEGORY: 'Fast Food', IMAGE: 'pizza.jpg' }
+        ];
+        jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+            ok: true,
+            json: () => Promise.resolve(mockFoodData)
+        });
 
-  // Wait for the filtered data to render
-  await waitFor(() => expect(getAllByTestId("food-item")).toHaveLength(1));
+        render(<ExploreFood />);
 
-  expect(getByText("Pizza")).toBeInTheDocument();
-  expect(getByText("R10")).toBeInTheDocument();
+        
+        expect(screen.getAllByRole('listitem')).toHaveLength(3);
+        
+
+        fireEvent.change(screen.getByPlaceholderText('Search for product items'), { target: { value: 'Apple' } });
+
+      
+        expect(screen.getAllByRole('listitem')).toHaveLength(1);
+        expect(screen.getByText('Apple')).toBeInTheDocument();
+        
+
+        fireEvent.change(screen.getByPlaceholderText('Search for product items'), { target: { value: 'Food' } });
+        expect(screen.getAllByRole('listitem')).toHaveLength(2);
+        expect(screen.getByText('Apple')).toBeInTheDocument();
+        expect(screen.getByText('Banana')).toBeInTheDocument();
+        
+    });
 });
