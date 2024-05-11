@@ -60,7 +60,7 @@ const ExploreFood = () => {
                 {filteredFoodData.map((foodItem, index) => {
                     return(
                         <div /*onclick={()=>setCategory(prev=>prev===foodItem.CATEGORY?"All":foodItem.CATEGORY)}*/ key={index} className="explore-food-list-item">
-                            <img className={category===foodItem.CATEGORY?"active":""} src={foodItem.IMAGE} alt="" />
+                            <img /*className={category===foodItem.CATEGORY?"active":""}*/ src={foodItem.IMAGE} alt="" />
                             <p>{foodItem.CATEGORY}</p>
 
                         </div>                     
