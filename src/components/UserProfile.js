@@ -10,7 +10,7 @@ const UserProfile=()=>{
             <article className="column">
                 <p>{user.sub}</p>
             </article>
-        )
+        ) 
     )
 }
 

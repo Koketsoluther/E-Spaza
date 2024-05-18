@@ -1,21 +1,49 @@
 import { createContext, useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
+
+    const {user, isAuthenticated} = useAuth0()
     const [foodData, setFoodData] = useState([]);
     const [cartItems, setCartItems]= useState({})
-    const addToCart=(itemId)=>{
+
+    const loadcartData = async () => {
+
+        if(isAuthenticated){
+            const userId = user.sub
+            const res = await axios.post("http://localhost:4000/api/cart/get",{userId})
+            console.log(res)
+            setCartItems(res.data.cartData)
+        }
+
+    }
+
+    const addToCart= async (itemId)=>{
 
         if(!cartItems[itemId]){
             setCartItems((prev)=>({...prev,[itemId]:1}));
         }
-
         else{
             setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
         }
+
+        if(isAuthenticated){
+            const userId = user.sub
+            const res = await axios.post("http://localhost:4000/api/cart/add",{itemId,userId})
+            console.log(res)
+        }
     }
-    const removeFromCart=(itemId) => {
+
+    const removeFromCart= async (itemId) => {
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
+
+        if(isAuthenticated){
+            const userId = user.sub
+            const res = await axios.post("http://localhost:4000/api/cart/remove",{itemId,userId})
+            console.log(res)
+        }
     }
 
     const getTotalCartAmount=()=>{
@@ -34,6 +62,7 @@ const StoreContextProvider = (props) => {
     }
 
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                
@@ -44,13 +73,16 @@ const StoreContextProvider = (props) => {
                 const data = await response.json();
                 console.log(data)
                 setFoodData(data.data);
+
+                await loadcartData()
+
             } catch (error) {
                 console.error('Error fetching food data:', error);
             }
         };
 
         fetchData();
-    }, []);
+    }, [isAuthenticated]);
 
     const contextValue = {
         foodData,

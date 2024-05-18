@@ -11,15 +11,17 @@ const clientId='Z8R7nmU8IkNttNvD3nZK3WKtWdINm8R0';
 ReactDOM.render(  
     <BrowserRouter>
     
-        <StoreContextProvider>
+        
         <Auth0Provider
             domain={domain}
             clientId={clientId}
             authorizationParams={{
             redirect_uri: window.location.origin}}>
-            <App/>
+            <StoreContextProvider>    
+                <App/>
+            </StoreContextProvider>
         </Auth0Provider>
-        </StoreContextProvider>
+        
         
     </BrowserRouter>
     , 
