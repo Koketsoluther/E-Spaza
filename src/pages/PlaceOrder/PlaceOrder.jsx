@@ -47,11 +47,12 @@ const PlaceOrder=()=>{
             ADDRESS: data,
             ITEMS: orderItems,
             AMOUNT: getTotalCartAmount()+2,
-            USERID: user.sub
+            userId: user.sub
         }
 
         if(isAuthenticated){
-            let res = axios.post("http://localhost:4000/api/cart/get",orderData)
+            let res = axios.post("http://localhost:4000/api/order/place",orderData)
+            console.log(res.data)
         }
 
        

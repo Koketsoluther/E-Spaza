@@ -9,7 +9,7 @@ import orderRouter from "./routes/orderRoute.js";
 
 // app config
 const app = express();
-const port = 4000;
+const port = 2000;
 
 // middleware
 app.use(express.json());
@@ -26,7 +26,7 @@ app.use("/api/cart",cartRouter)
 app.use("/api/order",orderRouter)
 
 app.get("/",(req,res)=>{
-    res.send("hallo:D!!!!")
+    res.send("hallo:D from 2k!!!!")
 })
 
 app.listen(port,()=>{
