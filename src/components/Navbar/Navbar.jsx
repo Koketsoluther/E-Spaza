@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import LoginButton from "../LoginForm/LoginButton";
 import LogoutButton from "../LoginForm/LogoutButton";
 import UserProfile from "../UserProfile";
+
 const Navbar=()=>{
 
     const [menu,setMenu]= useState("home")
@@ -26,9 +27,12 @@ const Navbar=()=>{
                     <Link to='/cart'><img src={assets.basket_icon} alt=""/></Link>
                     <div className="dot"></div>
                 </div>
- 
+                
                 <LoginButton/>
-                <UserProfile/>  
+                <section>
+                <Link to='/admin'onClick={() => setMenu("admin")} className={menu === "admin" ? "active" : ""}>
+            Admin</Link>
+                </section>
                 <LogoutButton/>
 
             </section>
