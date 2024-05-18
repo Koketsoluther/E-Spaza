@@ -3,6 +3,7 @@ import './shops.css'
 import axios from "axios";
 import jsPDF from "jspdf";
 import {toast} from "react-toastify"
+import { BsMenuButtonWideFill} from 'react-icons/bs'
 
 const List = () => {
     const url = "http://localhost:4000"
@@ -63,7 +64,6 @@ const List = () => {
     
     
       const exportPDF = async (shop) => {
-        const shopHistory = await getShopHistory(shop._id);
         const orders = await getOrderList(shop._id);
         const staff = await getStaffList(shop._id);
         if (staff.length ===0 || orders.length === 0) return;
@@ -112,7 +112,7 @@ const List = () => {
                             <p>{shop.NAME}</p>
                             <p>{shop.ADRESS}</p>
                             <p>${shop.OWNER}</p>
-                            <p onClick={()=>exportPDF(shop)} className='cursor'>R</p>
+                            <p onClick={()=>exportPDF(shop)} className='cursor'> <BsMenuButtonWideFill className='icon'/> Reports</p>
                             <p onClick={()=>removeShop(shop._id)} className='cursor'>X</p>
                         </div>
                     )
