@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import './managestock.css'
 import axios from "axios"
 import {toast} from "react-toastify"
+import { jsPDF } from 'jspdf';
+
 
 const manage = () => {
     const url = "http://localhost:4000"
@@ -30,9 +32,10 @@ const manage = () => {
         const doc = new jsPDF();
         doc.text(`Number of Products: ${items.length}`, 10, 10);
 
-        let row1 = 60;
+        let row1 = 10;
         items.forEach((item) => {
             doc.text(item.NAME, 10, row1);
+            doc.text(item.STOCK, 10, row1);
             row1 += 10;
         });
 

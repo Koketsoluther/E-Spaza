@@ -30,11 +30,12 @@ const Navbar=()=>{
                     <div className="dot"></div>
                 </div>
                 
+                
+                <LoginButton/>
+                
                 <section>
                     <AdminButton/>
                 </section>
-                <LoginButton/>
-                
                 
                 <LogoutButton/>
 

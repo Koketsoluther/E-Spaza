@@ -1,64 +1,43 @@
 import React, { useState } from 'react'
 import './addstaff.css'
-// import { Password } from '@mui/icons-material';
-
-
+import axios from 'axios'
+import {toast} from "react-toastify"
 
 const Add = () => {
+const url = "http://localhost:4000"
 
-const [staffName,setStaffName]= useState('');
-const [staffSurname,setStaffSurname]= useState('');
-const [shopName,setShopName]= useState('');
-const [staffIDnumber,setStaffID]= useState('');
-const [staffPassword,setPassword]= useState('');
-const [staffPermission,setPermission]= useState('');
-
-
-const handleStaffNameChange=(event)=>{
-    setStaffName(event.target.value);
-};
-const handleSurnameChange=(event)=>{
-    setStaffSurname(event.target.value);
-};
-const handleShopNameChange=(event)=>{
-    setShopName(event.target.value);
-};
-const handleStaffIDChange=(event)=>{
-    setStaffID(event.target.value);
-};
-const handlePasswordChange=(event)=>{
-    setPassword(event.target.value);
-};
-const handlePermissionChange=(event)=>{
-    setPermission(event.target.value);
-};
-
-
-// const [data,setData] = useState({
-//     // name: "",
-//     // surname:"",
-//     // shop:"",
-//     // ID_number: "",
-//     // Staffpassword:"",
-//     // permision: "Staff"
+const [data,setData] = useState({
+    NAME: "",
+    SURNAME:"",
+    SHOP:"",
+    IDNUMBER: "",
+    STAFFPASSWORD:"",
+    PERMISSION: "Staff"
     
-// })
-// const onChangeHandler = (event) => {
-//     const name = event.target.name;
-//     const value = event.target.value;
-//     setData(data => ({...data,[name]:value}))
-// }
+})
+const onChangeHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setData(data => ({...data,[name]:value}))
+}
 
 const onSubmitHandler = async (event) => {
     event.preventDefault();
-    // const formData = new FormData();
-    // formData.append("firstname",data.name)
-    // formData.append("surname",data.surname)
-    // formData.append("shopname",data.shop)
-    // formData.append("IDnumber",data.ID_number)
-    // formData.append("staffpassword",data.Staffpassword)
-    // formData.append("permission",data.permision)
-    
+    const formData = new FormData();
+    formData.append("NAME",data.NAME)
+    formData.append("SURNAME",data.SURNAME)
+    formData.append("SHOPID",Number(data.SHOP))
+    formData.append("IDNUMBER",data.IDNUMBER)
+    formData.append("STAFFPASSWORD",data.STAFFPASSWORD)
+    formData.append("PERMISSION",data.PERMISSION)
+    const response= await axios.post(`${url}/api/staff/add`,{})
+    console.log(response)
+    if (response.data.success){
+        toast.success(response.data.message)
+    }
+    else{
+        toast.error("Error")
+    }
 }
     return (
         <div className='add'>
@@ -66,29 +45,29 @@ const onSubmitHandler = async (event) => {
                 
                 <div className = "add-Staff-first-name flex-col">
                     <p>Staff Firstname</p>
-                    <input onChange={handleStaffNameChange}  value={staffName} type= "text" name='firstname' placeholder = 'Type here'/>
+                    <input onChange={onChangeHandler}  value={data.NAME} type= "text" name='NAME' placeholder = 'Type here'/>
                 </div>
                 <div className = "add-Shopowner-name flex-col">
                     <p>Staff Surname</p>
-                    <input onChange={handleSurnameChange}  value={staffSurname} type= "text" name='surname' placeholder = 'Type here'/>
+                    <input onChange={onChangeHandler}  value={data.SURNAME} type= "text" name='SURNAME' placeholder = 'Type here'/>
                 </div>
                 <div className = "add-Shop-name flex-col">
                     <p>Shop name</p>
-                    <input onChange={handleShopNameChange}  value={shopName} type= "text" name='shopname' placeholder = 'Type here'/>
+                    <input onChange={onChangeHandler}  value={data.SHOP} type= "text" name='SHOPID' placeholder = 'Type here'/>
                 </div>
                 <div className = "add-staffIDnumber flex-col">
                     <p>Staff ID number</p>
-                    <input onChange={handleStaffIDChange}  value={staffIDnumber} type= "text" name='IDnumber' placeholder = 'Type here' required/>
+                    <input onChange={onChangeHandler}  value={data.IDNUMBER} type= "text" name='IDNUMBER' placeholder = 'Type here' required/>
                 </div>
                 <div className = "add-staffpassword flex-col">
                     <p>Default Staff password</p>
-                    <input onChange={handlePasswordChange}  value={staffPassword} type='Password' name='staffpassword' placeholder = 'Type here'/>
+                    <input onChange={onChangeHandler}  value={data.STAFFPASSWORD} type= "text" name='STAFFPASSWORD' placeholder = 'Type here'/>
                 </div>
-                <div className='add-staffpermission flex col' value={staffPermission}>
+                <div className='add-staffpermission flex col'>
                         <p>Choose Staff Permission</p>
-                        <select name="permision" onChange={handlePermissionChange}  >
-                            <option value= "Owner">Owner</option>
-                            <option value= "Staff">Staff</option>
+                        <select name="PERMISSION" onChange={onChangeHandler}  >
+                            <option value= {data.PERMISSION}>Owner</option>
+                            <option value= {data.PERMISSION}>Staff</option>
                         </select>
                     </div>
                 
