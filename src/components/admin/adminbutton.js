@@ -6,7 +6,7 @@ const AdminButton = () => {
     const navigate = useNavigate();
 
     const handleAdminRedirect = () => {
-        navigate('/admin/listproducts');
+        navigate('/admin');
     };
 
     return (
