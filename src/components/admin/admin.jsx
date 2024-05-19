@@ -10,7 +10,7 @@ import Managestock from './pages/Managestock/managestock'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
-const App = () =>{
+const Admin = () =>{
   return(
     <div>
       <ToastContainer/>
@@ -19,14 +19,14 @@ const App = () =>{
       <div className='app-content'>
         <Sidebar/>
         <Routes>
-          <Route path= "/addproduct" element = {<Addproduct/>}/>
-          <Route path= "/addstaff" element = {<Addstaff/>}/>
+          <Route path= "/admin/addproduct" element = {<Addproduct/>}/>
+          <Route path= "/admin/addstaff" element = {<Addstaff/>}/>
           <Route path= "/addshop" element = {<Addshop/>}/>
-          <Route path= "/ListProduct" element = {<Listproduct/>}/>
+          <Route path= "/admin/listProducts" element = {<Listproduct/>}/>
           <Route path= "/Managestock" element = {<Managestock/>}/>
         </Routes>
       </div>
     </div>
   )
 }
-export default App
+export default Admin

@@ -8,11 +8,11 @@ const Sidebar = () => {
     return (
         <div className = 'sidebar'>
             <div className = "sidebar-options">
-                <NavLink to= '/ListProduct' className= "sidebar-option">
+                <NavLink to= '/admin/listproducts' className= "sidebar-option">
                 <img  src= {assets.product_icon} alt = ""/>
                     <p>List Products</p>
                 </NavLink>
-                <NavLink to= '/Addproduct' className= "sidebar-option">
+                <NavLink to= '/admin/Addproduct' className= "sidebar-option">
                     <img  src= {assets.add_product} alt = ""/>
                     <p>Add Products</p>
                     </NavLink>

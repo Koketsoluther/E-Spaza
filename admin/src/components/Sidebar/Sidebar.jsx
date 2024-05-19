@@ -20,6 +20,12 @@ const Sidebar = () => {
       setIsShopsDropdownOpen(!isShopsDropdownOpen);
     };
 
+    const [isOrdersDropdownOpen, setIsOrdersDropdownOpen] = useState(false);
+
+    const toggleOrdersDropdown = () => {
+      setIsOrdersDropdownOpen(!isOrdersDropdownOpen);
+    };
+
 
     return (
         <div className = 'sidebar'>
@@ -56,7 +62,20 @@ const Sidebar = () => {
           </div>
         )}
                 
-                
+                <div className='sidebar-option' onClick={toggleOrdersDropdown}>
+                <p> Orders</p>
+                {isOrdersDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+        {isOrdersDropdownOpen && (
+          <div className='dropdown-menu'>
+            <NavLink to='/assignorders' className='dropdown-item'>
+              <p>Assign Orders</p>
+            </NavLink>
+            <NavLink to='/orders' className='dropdown-item'>
+              <p>Orders</p>
+            </NavLink>
+          </div>
+        )}       
 
                 <NavLink to= '/Addstaff' className= "sidebar-option">
                     <p><BsPeopleFill className='icon'/>Add Staff</p>

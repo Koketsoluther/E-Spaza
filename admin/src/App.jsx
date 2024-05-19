@@ -9,6 +9,8 @@ import Listproduct from './pages/ListProduct/listproduct'
 import Managestock from './pages/Managestock/managestock'
 import Shops from './pages/listShops/shops'
 import Dashboard from './pages/Dashboard/dashboard'
+import ListOrders from './pages/listOrders/listorders'
+import AssignOrders from './pages/assignorders/assignorders'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,6 +30,8 @@ const App = () =>{
           <Route path= "/shops" element = {<Shops/>}/>
           <Route path= "/ListProduct" element = {<Listproduct/>}/>
           <Route path= "/Managestock" element = {<Managestock/>}/>
+          <Route path= "/listorders" element = {<ListOrders/>}/>
+          <Route path= "/assignOrders" element = {<AssignOrders/>}/>
         </Routes>
       </div>
     </div>

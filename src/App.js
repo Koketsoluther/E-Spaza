@@ -4,7 +4,8 @@ import Navbar from './components/Navbar/Navbar';
 import { Route,Routes } from 'react-router-dom';
 import Home  from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
-import Admin from './pages/admin/admin'
+import Admin from './components/admin/admin'
+import Listproduct from './components/admin/pages/ListProduct/listproduct'
 
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path= '/admin' element={<Admin/>}/>
+            <Route path="listproducts" element={<Listproduct/>} />
+            
+          
         </Routes>
 
       </div>
