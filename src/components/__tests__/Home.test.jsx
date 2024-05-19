@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Home from '../../pages/Home/Home';
 
 jest.mock('../../components/Header/Header', () => () => <div data-testid="header">Header</div>);
