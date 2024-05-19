@@ -4,6 +4,6 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[![codecov](https://codecov.io/gh/Koketsoluther/E-Spaza/graph/badge.svg?token=3SC0QO4DAL)](https://codecov.io/gh/Koketsoluther/E-Spaza)
+[![codecov](https://codecov.io/gh/Koketsoluther/E-Spaza/branch/shoppersUI/graph/badge.svg?token=3SC0QO4DAL)](https://codecov.io/gh/Koketsoluther/E-Spaza)
 
 
