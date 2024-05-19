@@ -40,6 +40,7 @@ const userOrders = async (req,res)=>{
 const listOrders = async (req,res) =>{
     try {
         const orders = await orderModel.find({});
+        console.log(orders)
         res.json({success: true, data:orders})
     } catch (error) {
         console.log(error)
@@ -50,10 +51,12 @@ const listOrders = async (req,res) =>{
 // api for updating order status and set shop fufilling order
 const updateStatus = async (req,res)=>{
     try {
-        await orderModel.findByIdAndUpdate(req.body,orderId,{STATUS: req.body.status, SHOP: req.body.SHOP})
+        
+        await orderModel.findByIdAndUpdate(req.body.orderId,{STATUS: req.body.STATUS})
         res.json({success:true, message: "Order Status Updated"})
+        
     } catch (error) {
-        console.loge(error)
+        console.log(error)
         res.json({success: false, message: "Error"})
     }
 }
