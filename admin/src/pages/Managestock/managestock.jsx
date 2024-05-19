@@ -23,7 +23,7 @@ const manage = () => {
         if (items.length === 0) return;
           const doc = new jsPDF(item);
           
-          doc.text(`Number of Orders: ${items.length}`, 10, 10);
+          doc.text(`Number of Products: ${items.length}`, 10, 10);
           let row1 = 60;
           items.forEach((item) => {
             doc.text(item.NAME, 10, row1);
