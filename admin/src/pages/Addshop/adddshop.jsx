@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import './addshop.css'
-
+import axios from 'axios'
+import {toast} from "react-toastify"
 
 
 const Add = () => {
-
+const url = "http://localhost:4000"
 
 const [data,setData] = useState({
     name: "",
@@ -15,16 +16,25 @@ const [data,setData] = useState({
 const onChangeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
+    console.log(data)
     setData(data => ({...data,[name]:value}))
 }
 
 const onSubmitHandler = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("name",data.name)
-    formData.append("address",data.address)
-    formData.append("ownername",data.ownername)
-    
+    formData.append("NAME",data.name)
+    formData.append("ADDRESS",data.address)
+    formData.append("SHOPOWNER",data.ownername)
+    const response= await axios.post(`${url}/api/shop/add`,{NAME:data.name,ADDRESS:data.address,SHOPOWNER:data.ownername})
+    console.log(response)
+    if (response.data.success){
+        toast.success(response.data.message)
+    }
+    else{
+        toast.error("Error")
+    }
+
 }
     return (
         <div className='add'>
@@ -32,15 +42,15 @@ const onSubmitHandler = async (event) => {
                 
                 <div className = "add-Shop-name flex-col">
                     <p> Shop Name</p>
-                    <input onChange={onChangeHandler}  value={data.name} type= "text" name='name' placeholder = 'Type here'/>
+                    <input onChange={onChangeHandler}  defaultValue={data.name} type= "text" name='name' placeholder = 'Type here'/>
                 </div>
                 <div className = "add-Shopowner-name flex-col">
                     <p> Shop Owner Name</p>
-                    <input onChange={onChangeHandler}  value={data.name} type= "text" name='ownername' placeholder = 'Type here'/>
+                    <input onChange={onChangeHandler}  defaultValue={data.ownername} type= "text" name='ownername' placeholder = 'Type here'/>
                 </div>
                 <div className ="add-Shop-Address flex-col">
                     <p> Shop address</p>
-                    <textarea onChange={onChangeHandler} value={data.description} name='addresss' rows="6" placeholder='Write address here' required></textarea>
+                    <textarea onChange={onChangeHandler} defaultValue={data.address} name='address' rows="6" placeholder='Write address here' required></textarea>
 
                 </div>
                 

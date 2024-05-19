@@ -42,7 +42,7 @@ const removeProduct = async(ProductID)=>{
 
   return (
     <div className='list add flex-col'>
-        <p>All Products available</p>
+        <p>All Order available</p>
         <div className='list-table'>
         <div className='list-table-format title'>
             

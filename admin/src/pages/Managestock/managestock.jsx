@@ -5,34 +5,43 @@ import {toast} from "react-toastify"
 
 const manage = () => {
     const url = "http://localhost:4000"
-    const [list,setList] = useState([]);
+    const [list, setList] = useState([]);
 
-    const fetchList =async () => {
-        const response =await axios.get(`${url}/api/products/list`);
-
-        if(response.data.success){
-            setList(response.data.data)
+    const fetchList = async () => {
+        try {
+            const response = await axios.get(`${url}/api/products/list`);
+            if (response.data.success) {
+                setList(response.data.data);
+                return response.data.data; // Return the data
+            } else {
+                toast.error('Error fetching the product list');
+                return [];
+            }
+        } catch (error) {
+            toast.error('Error fetching the product list');
+            return [];
         }
-        else{
-            toast.error("error")
-        }
-    }
+    };
 
-    const exportPDF = async (item) => {
+    const exportPDF = async () => {
         const items = await fetchList();
         if (items.length === 0) return;
-          const doc = new jsPDF(item);
-          
-          doc.text(`Number of Products: ${items.length}`, 10, 10);
-          let row1 = 60;
-          items.forEach((item) => {
+
+        const doc = new jsPDF();
+        doc.text(`Number of Products: ${items.length}`, 10, 10);
+
+        let row1 = 60;
+        items.forEach((item) => {
             doc.text(item.NAME, 10, row1);
             row1 += 10;
-          });
-          
-          doc.save(`Manage_stock.pdf`);
-        
-      }
+        });
+
+        doc.save('Manage_stock.pdf');
+    };
+
+    useEffect(() => {
+        fetchList();
+    }, []);
     
     useEffect(()=>{
         fetchList();
@@ -53,13 +62,13 @@ const manage = () => {
                             <img src={`${url}/images/`+item.IMAGE} alt = "" />
                             <p>{item.NAME}</p>
                             <p>{item.CATEGORY}</p>
-                            <p>${item.QUANTITY}</p>
+                            <p>{item.STOCK}</p>
                             
                         </div>
                     )
                 })}
             </div>
-            <button onClick={() => exportPDF(item)}>Export as PDF</button>
+            <button onClick={() => exportPDF()}>Export as PDF</button>
         </div>
     )
 }

@@ -10,7 +10,7 @@ const List = () => {
     const [list,setList] = useState([]);
 
     const fetchList =async () => {
-        const response =await axios.get(`${url}/api/shops/list`);
+        const response =await axios.get(`${url}/api/shop/list`);
 
         if(response.data.success){
             setList(response.data.data)
@@ -21,7 +21,7 @@ const List = () => {
     }
 
     const removeShop = async(ShopID) => {
-        const response = await axios.post(`${url}/api/shop/remove`,{id:ShopID});
+        const response = await axios.post(`${url}/api/shop/remove`,{shopid:ShopID});
         await fetchList();
         if (response.data.success){
             toast.success(response.data.message)
@@ -72,7 +72,7 @@ const List = () => {
           const doc = new jsPDF();
           doc.text(`Shop Name: ${shop.NAME}`, 10, 10);
           doc.text(`Address: ${shop.ADRESS}`, 10, 20);
-          doc.text(`Owner: ${shop.OWNER}`, 10, 30);
+          doc.text(`Owner: ${shop.SHOPOWNER}`, 10, 30);
           doc.text(`Number of Orders: ${orders.length}`, 10, 40);
           let row1 = 60;
           orders.forEach((order) => {
@@ -110,8 +110,8 @@ const List = () => {
                     return (
                        <div key={index} className='list-table-format'>
                             <p>{shop.NAME}</p>
-                            <p>{shop.ADRESS}</p>
-                            <p>${shop.OWNER}</p>
+                            <p>{shop.ADDRESS}</p>
+                            <p>{shop.SHOPOWNER}</p>
                             <p onClick={()=>exportPDF(shop)} className='cursor'> <BsMenuButtonWideFill className='icon'/> Reports</p>
                             <p onClick={()=>removeShop(shop._id)} className='cursor'>X</p>
                         </div>
