@@ -1,6 +1,7 @@
-import React , { useState } from 'react'
+import React from 'react'
+import{ useState } from 'react'
 import './Sidebar.css'
-import {assets} from '../../assets/assets'
+// import {assets} from '../../assets/assets'
 import { NavLink } from 'react-router-dom'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import {BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsPeopleFill, BsListCheck} from 'react-icons/bs'
@@ -71,7 +72,7 @@ const Sidebar = () => {
             <NavLink to='/assignorders' className='dropdown-item'>
               <p>Assign Orders</p>
             </NavLink>
-            <NavLink to='/orders' className='dropdown-item'>
+            <NavLink to='/listorders' className='dropdown-item'>
               <p>Orders</p>
             </NavLink>
           </div>
