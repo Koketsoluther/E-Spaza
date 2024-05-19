@@ -11,6 +11,9 @@ const ExploreFood = () => {
         const fetchFoodData = async () => {
             try {
                 const response = await fetch('https://us-central1-e-spazadb.cloudfunctions.net/app/api/items');
+                if (!response) {
+                    throw new Error('No response received');
+                }
                 if (!response.ok) {
                     throw new Error('Failed to fetch food data');
                 }
