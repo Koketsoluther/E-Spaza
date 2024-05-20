@@ -4,7 +4,7 @@ import { assets } from "../Assets/assets";
 
 const Footer=()=>{
     return(
-        <div className="footer" id='footer'>
+        <div className="footer" id='footer' data-testid="footer">
             <div className="footer-content">
                 <div className="footer-content-left">
                     <h2>E-spaza</h2>

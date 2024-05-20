@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './ExploreFood.css';
-const ExploreFood = ({category, setCategory}) => {
+const ExploreFood = () => {
     const [foodData, setFoodData] = useState([]);
     const [filteredFoodData, setFilteredFoodData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -11,6 +11,9 @@ const ExploreFood = ({category, setCategory}) => {
         const fetchFoodData = async () => {
             try {
                 const response = await fetch('https://us-central1-e-spazadb.cloudfunctions.net/app/api/items');
+                if (!response) {
+                    throw new Error('No response received');
+                }
                 if (!response.ok) {
                     throw new Error('Failed to fetch food data');
                 }
@@ -59,8 +62,8 @@ const ExploreFood = ({category, setCategory}) => {
             <section className="explore-food-list">
                 {filteredFoodData.map((foodItem, index) => {
                     return(
-                        <div onclick={()=>setCategory(prev=>prev===foodItem.CATEGORY?"All":foodItem.CATEGORY)} key={index} className="explore-food-list-item">
-                            <img className={category===foodItem.CATEGORY?"active":""} src={foodItem.IMAGE} alt="" />
+                        <div /*onclick={()=>setCategory(prev=>prev===foodItem.CATEGORY?"All":foodItem.CATEGORY)}*/ key={index} className="explore-food-list-item">
+                            <img /*className={category===foodItem.CATEGORY?"active":""}*/ src={foodItem.IMAGE} alt="" />
                             <p>{foodItem.CATEGORY}</p>
 
                         </div>                     

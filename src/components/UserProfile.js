@@ -3,13 +3,14 @@ import React from 'react';
 const UserProfile=()=>{
 
     const {user,isAuthenticated}=useAuth0();
+    
     return (
         isAuthenticated && (
         
             <article className="column">
-                <p>{user['https://my-app.example.com/roles']}</p>
+                <p>{user.sub}</p>
             </article>
-        )
+        ) 
     )
 }
 

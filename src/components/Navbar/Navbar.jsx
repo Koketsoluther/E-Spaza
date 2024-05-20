@@ -7,6 +7,7 @@ import LoginButton from "../LoginForm/LoginButton";
 import LogoutButton from "../LoginForm/LogoutButton";
 import UserProfile from "../UserProfile";
 import { StoreContext } from "../../context/StoreContext";
+
 const Navbar=()=>{
 
     const [menu,setMenu]= useState("home");
@@ -23,10 +24,10 @@ const Navbar=()=>{
 
             </ul>
             <section className="navbar-right">
-                <img src={assets.search_icon} alt="" />
+                <img src={assets.search_icon} alt="/search icon/i" />
                 <div className="navbar-search-icon">
-                    <Link to='/cart'><img src={assets.basket_icon} alt=""/></Link>
-                    <div className={getTotalCartAmount()===0?"":"dot"}></div>
+                    <Link to='/cart'><img src={assets.basket_icon} alt="/basket icon/i"/></Link>
+                    <div data-testid="cart-dot"  className={getTotalCartAmount()===0?"":"dot"}></div>
                 </div>
  
                 <LoginButton/>

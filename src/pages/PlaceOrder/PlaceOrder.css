@@ -26,3 +26,18 @@
     outline-color: rgb(31, 40, 71);
 
 }
+
+.place-order-right{
+    margin-top: 220px;
+    width: 100%;
+    max-width: max(40%, 500px);
+}
+
+.place-order-left .multi-fields{
+    display: flex;
+    gap: 10px;
+}
+
+.cart-total button{
+    margin-top: 20px;
+}
