@@ -32,8 +32,6 @@ test('renders Navbar, PlaceOrder, and Footer components', async () => {
   
     expect(screen.getByTestId('navbar')).toBeInTheDocument();
 
-
-  
     expect(screen.getByTestId('place-order')).toBeInTheDocument();
  
 
