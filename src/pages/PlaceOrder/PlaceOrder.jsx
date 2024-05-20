@@ -34,7 +34,7 @@ const PlaceOrder=()=>{
     const placeOrder = async (event) =>{
         event.preventDefault()
         let orderItems = []
-        foodData.map((item)=>{
+        foodData.forEach((item)=>{
             if(cartItems[item._id]>0){
                 let itemInfo = item;
                 itemInfo["quantity"] = cartItems[item._id]
