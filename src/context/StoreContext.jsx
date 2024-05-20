@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect ,useCallback} from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 export const StoreContext = createContext(null);
@@ -9,16 +9,18 @@ const StoreContextProvider = (props) => {
     const [foodData, setFoodData] = useState([]);
     const [cartItems, setCartItems]= useState({})
 
-    const loadcartData = async () => {
-
-        if(isAuthenticated){
-            const userId = user.sub
-            const res = await axios.post("http://localhost:4000/api/cart/get",{userId})
-            console.log(res)
-            setCartItems(res.data.cartData)
+    const loadcartData = useCallback(async () => {
+        if (isAuthenticated) {
+            const userId = user.sub;
+            try {
+                const res = await axios.post("http://localhost:4000/api/cart/get", { userId });
+                console.log(res);
+                setCartItems(res.data.cartData);
+            } catch (error) {
+                console.error("Error loading cart data:", error);
+            }
         }
-
-    }
+    }, [isAuthenticated, user]);
 
     const addToCart= async (itemId)=>{
 
@@ -82,7 +84,7 @@ const StoreContextProvider = (props) => {
         };
 
         fetchData();
-    }, [isAuthenticated]);
+    }, [isAuthenticated, loadcartData]);
 
     const contextValue = {
         foodData,
