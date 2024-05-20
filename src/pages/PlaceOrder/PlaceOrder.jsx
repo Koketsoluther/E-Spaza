@@ -6,7 +6,7 @@ import axios from "axios";
 
 const PlaceOrder=()=>{
     const {user, isAuthenticated} = useAuth0()
-    const{getTotalCartAmount, cartItems,foodData}=useContext(StoreContext)
+    const {getTotalCartAmount, cartItems,foodData}=useContext(StoreContext)
 
     const [data, setData] = useState({
         firstName:"",
@@ -22,7 +22,7 @@ const PlaceOrder=()=>{
     }) 
 
     useEffect(()=>{
-        console.log(data)
+        
     },[data])
 
     const onChangeHandler = (event) => {
@@ -51,9 +51,10 @@ const PlaceOrder=()=>{
         }
 
         if(isAuthenticated){
-            let res = axios.post("http://localhost:4000/api/order/place",orderData)
-            console.log(res.data)
-        }
+            const res = await axios.post("http://localhost:4000/api/order/place",orderData)
+            
+            console.log(res.data.message)
+}
 
        
 

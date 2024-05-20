@@ -12,7 +12,7 @@ const FoodDisplay=({category})=>{
                 {foodData.map((item,index)=>{
                     console.log(category,item.CATEGORY);
                     if(category==="All" || category===item.category){
-                        return <ProductItem key={index} id={item._id} NAME={item.NAME} PRICE={item.PRICE} IMAGE={item.IMAGE}/>
+                        return <ProductItem key={index} id={item._id} NAME={item.NAME} PRICE={item.PRICE} IMAGE={item.IMAGE} STOCK={item.STOCK}/>
                     }
                     else{
                         return null;

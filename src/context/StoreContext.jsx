@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 export const StoreContext = createContext(null);
 
+
 const StoreContextProvider = (props) => {
 
     const {user, isAuthenticated} = useAuth0()
@@ -20,13 +21,39 @@ const StoreContextProvider = (props) => {
 
     }
 
-    const addToCart= async (itemId)=>{
+    const addToCart= async (itemId, stock)=>{
 
         if(!cartItems[itemId]){
-            setCartItems((prev)=>({...prev,[itemId]:1}));
+
+            console.log(stock)
+            
+            if(stock == 0){
+                console.log("OUT OF STOCK");
+                return
+            }
+            else{
+                setCartItems((prev)=>({...prev,[itemId]:1}));
+            }
+            
         }
         else{
-            setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
+             console.log(stock)
+
+            if(stock == cartItems[itemId] ){
+                console.log("There isn't more stock...")
+                return
+            }
+
+            else if(stock == 0){
+                console.log("OUT OF STOCK");
+                return
+            }
+
+            else{
+                setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
+            }
+
+            
         }
 
         if(isAuthenticated){
@@ -49,7 +76,6 @@ const StoreContextProvider = (props) => {
     const getTotalCartAmount=()=>{
         let totalAmount=0;
         for(const item in cartItems){
-            console.log(item)
             if(cartItems[item]>0){
                 let itemInfo= foodData.find((product)=> product._id ===item);
                 totalAmount+=itemInfo.PRICE*cartItems[item];
