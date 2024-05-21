@@ -18,7 +18,7 @@ const Navbar=()=>{
  
             <ul className="navbar-menu">
                 <Link to='/' onClick={()=>setMenu("home")} data-testid="home" className={menu==="home"?"active":""}>home</Link>
-                <a href="#explore-food" onClick={()=>setMenu("orders")} className={menu==="orders"?"active":""}>orders</a>
+                <Link to="/myorders" onClick={()=>setMenu("orders")} className={menu==="orders"?"active":""}>orders</Link>
                 <a href="#footer" onClick={()=>setMenu("about-us")} className={menu==="about-us"?"active":""}>about Us</a>
                 <a href="#footer" onClick={()=>setMenu("contact-us")} className={menu==="contact-us"?"active":""}>contact us</a>
 

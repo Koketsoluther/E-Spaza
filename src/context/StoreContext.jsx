@@ -22,13 +22,39 @@ const StoreContextProvider = (props) => {
         }
     }, [isAuthenticated, user]);
 
-    const addToCart= async (itemId)=>{
+    const addToCart= async (itemId, stock)=>{
 
         if(!cartItems[itemId]){
-            setCartItems((prev)=>({...prev,[itemId]:1}));
+
+            console.log(stock)
+            
+            if(stock == 0){
+                console.log("OUT OF STOCK");
+                return
+            }
+            else{
+                setCartItems((prev)=>({...prev,[itemId]:1}));
+            }
+            
         }
         else{
-            setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
+             console.log(stock)
+
+            if(stock == cartItems[itemId] ){
+                console.log("There isn't more stock...")
+                return
+            }
+
+            else if(stock == 0){
+                console.log("OUT OF STOCK");
+                return
+            }
+
+            else{
+                setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
+            }
+
+            
         }
 
         if(isAuthenticated){
