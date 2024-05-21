@@ -11,12 +11,12 @@ const MyOrders = () => {
 
     const fetchOrders = useCallback(async () =>{
         if(isAuthenticated){
-         const res = await axios.post("http://localhost:4000/api/order/userorders", {userId: user.sub})
+         const res = await axios.post("https://us-central1-e-spazadb.cloudfunctions.net/func/api/order/userorders", {userId: user.sub})
          console.log(res.data.data)
          if(res.data.success){
             setData(res.data.data)
          } 
-         
+
         }
         else{
             console.log("YOU AINT SUPPOSED TO BE HERE BOY!!!1")

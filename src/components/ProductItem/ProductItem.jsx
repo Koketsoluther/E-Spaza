@@ -9,7 +9,7 @@ const ProductItem=({id, NAME, PRICE, IMAGE, STOCK})=>{
     return(
         <div className="product-item">
             <div className="product-item-img-container">
-                <img className="product-item-image" src={"http://localhost:4000/images/"+IMAGE} alt={NAME + " image"}/>
+                <img className="product-item-image" src={"https://us-central1-e-spazadb.cloudfunctions.net/func/images/"+IMAGE} alt={NAME + " image"}/>
                 {!cartItems[id]
                     ?<img className="add" onClick={()=>addToCart(id, STOCK)} src={assets.add_icon_white} alt="add icon" />
                     :<div className="product-item-counter">
