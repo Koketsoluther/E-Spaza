@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react"
+import React, {useState, useEffect, useCallback } from "react"
 import "./MyOrders.css"
 import { useAuth0 } from "@auth0/auth0-react"
 import axios from "axios"
@@ -9,7 +9,7 @@ const MyOrders = () => {
     const {user, isAuthenticated} = useAuth0()
     const [data, setData] = useState([])
 
-    const fetchOrders = async () =>{
+    const fetchOrders = useCallback(async () =>{
         if(isAuthenticated){
          const res = await axios.post("http://localhost:4000/api/order/userorders", {userId: user.sub})
          console.log(res.data.data)
@@ -17,16 +17,15 @@ const MyOrders = () => {
             setData(res.data.data)
          } 
          
-           
         }
         else{
             console.log("YOU AINT SUPPOSED TO BE HERE BOY!!!1")
         }
-    }
+    },[isAuthenticated, user]);
 
     useEffect(()=>{
         fetchOrders();
-    },[])
+    },[fetchOrders])
 
     return(
         <div>
