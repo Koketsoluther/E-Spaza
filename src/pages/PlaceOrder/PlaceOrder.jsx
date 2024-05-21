@@ -60,7 +60,7 @@ const PlaceOrder=()=>{
     }
 
     return(
-        <form onSubmit={placeOrder} className="place-order">
+        <form onSubmit={placeOrder} className="place-order" data-testid="place-order">
             <div className="place-order-left">
                 <p className="title">Delivery Information</p>
                 <div className="multi-fields">
