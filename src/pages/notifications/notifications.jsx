@@ -22,11 +22,11 @@ const Notifications = () => {
         else{
             console.log("YOU AINT SUPPOSED TO BE HERE BOY!!!1")
         }
-    },[isAuthenticated, user]);
+    },[isAuthenticated, user, data]);
 
     useEffect(()=>{
         fetchOrders();
-    },[fetchOrders])
+    },[fetchOrders, data])
 
     return(
         <div>
