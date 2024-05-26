@@ -13,8 +13,8 @@ const StoreContextProvider = (props) => {
         if (isAuthenticated) {
             const userId = user.sub;
             try {
-                const res = await axios.post("http://localhost:4000/api/cart/get", { userId });
-                console.log(res);
+                const res = await axios.post("https://us-central1-e-spazadb.cloudfunctions.net/func/api/cart/get", { userId });
+                console.log(res.data);
                 setCartItems(res.data.cartData);
             } catch (error) {
                 console.error("Error loading cart data:", error);
@@ -28,7 +28,7 @@ const StoreContextProvider = (props) => {
 
             console.log(stock)
             
-            if(stock === 0){
+            if(stock == 0){
                 console.log("OUT OF STOCK");
                 return
             }
@@ -40,12 +40,12 @@ const StoreContextProvider = (props) => {
         else{
              console.log(stock)
 
-            if(stock === cartItems[itemId] ){
+            if(stock == cartItems[itemId] ){
                 console.log("There isn't more stock...")
                 return
             }
 
-            else if(stock === 0){
+            else if(stock == 0){
                 console.log("OUT OF STOCK");
                 return
             }
@@ -59,7 +59,7 @@ const StoreContextProvider = (props) => {
 
         if(isAuthenticated){
             const userId = user.sub
-            const res = await axios.post("http://localhost:4000/api/cart/add",{itemId,userId})
+            const res = await axios.post("https://us-central1-e-spazadb.cloudfunctions.net/func/api/cart/add",{itemId,userId})
             console.log(res)
         }
     }
@@ -69,7 +69,7 @@ const StoreContextProvider = (props) => {
 
         if(isAuthenticated){
             const userId = user.sub
-            const res = await axios.post("http://localhost:4000/api/cart/remove",{itemId,userId})
+            const res = await axios.post("https://us-central1-e-spazadb.cloudfunctions.net/func/api/cart/remove",{itemId,userId})
             console.log(res)
         }
     }
@@ -77,9 +77,11 @@ const StoreContextProvider = (props) => {
     const getTotalCartAmount=()=>{
         let totalAmount=0;
         for(const item in cartItems){
-            console.log(item)
+            console.log(cartItems[item])
             if(cartItems[item]>0){
-                let itemInfo= foodData.find((product)=> product._id ===item);
+                
+                let itemInfo= foodData.find((product)=> product._id == item);
+                
                 totalAmount+=itemInfo.PRICE*cartItems[item];
             }
 
@@ -94,12 +96,12 @@ const StoreContextProvider = (props) => {
         const fetchData = async () => {
             try {
                
-                const response = await fetch("http://localhost:4000/api/products/list");
+                const response = await fetch("https://us-central1-e-spazadb.cloudfunctions.net/func/api/products/list");
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                console.log(data)
+                console.log("skibidi",data)
                 setFoodData(data.data);
 
                 await loadcartData()

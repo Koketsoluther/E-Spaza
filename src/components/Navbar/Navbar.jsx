@@ -27,6 +27,7 @@ const Navbar=()=>{
                 <img src={assets.search_icon} alt="/search icon/i" />
                 <div className="navbar-search-icon">
                     <Link to='/cart'><img src={assets.basket_icon} alt="/basket icon/i"/></Link>
+                    <Link to='/notifications'><img src={assets.basket_icon} alt="/basket icon/i"/></Link>
                     <div data-testid="cart-dot"  className={getTotalCartAmount()===0?"":"dot"}></div>
                 </div>
  

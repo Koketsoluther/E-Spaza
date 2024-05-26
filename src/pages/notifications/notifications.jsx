@@ -1,20 +1,21 @@
 import React, {useState, useEffect, useCallback } from "react"
-import "./MyOrders.css"
+import "./notifications.css"
 import { useAuth0 } from "@auth0/auth0-react"
 import axios from "axios"
 import { assets } from "../../components/Assets/assets"
 
-const MyOrders = () => {
+const Notifications = () => {
 
     const {user, isAuthenticated} = useAuth0()
-    const [data, setData] = useState([])
+    const [data, setData] = useState({})
 
     const fetchOrders = useCallback(async () =>{
         if(isAuthenticated){
-         const res = await axios.post("https://us-central1-e-spazadb.cloudfunctions.net/func/api/order/userorders", {userId: user.sub})
+         const res = await axios.post("https://us-central1-e-spazadb.cloudfunctions.net/func/api/user/getnotis", {userId: user.sub})
          console.log(res.data.data)
          if(res.data.success){
             setData(res.data.data)
+            console.log(data)
          } 
          
         }
@@ -30,23 +31,18 @@ const MyOrders = () => {
     return(
         <div>
             <div className="my-orders">
-                <h2>My Orders</h2>
+                <h2>Notifications</h2>
                 <div className="container">
-                    {data.map((order, index)=>{
+                    {Object.keys(data).map((orderId, index)=>{
+                        console.log(orderId)
+                        
+                        const order = data[orderId];
+                        var d = new Date(order.DATE)
                         return (
                             <div key={index} className ='my-orders-order'>
                                 <img src={assets.parcel_icon} alt=""/>
-                                    <p>{order.ITEMS.map((item, index)=>{
-                                        if(index === order.ITEMS.length-1){
-                                                return item.NAME+ " : "+ item.quantity
-                                        }
-                                        else{
-                                            return item.NAME+ " : "+ item.quantity+","
-                                        }
-                                    })}</p>
-                                    <p>R{order.AMOUNT}</p>
-                                    <p>You ordered {order.ITEMS.length} items.</p>
-                                    <p><span>&#x25cf;</span><b>{order.STATUS}</b> </p> 
+                                   <p>{d.toString()}</p>
+                                    <p><span>&#x25cf;</span><b>{order.MESSAGE}</b> </p> 
                                     
                                 
                             </div>
@@ -60,4 +56,4 @@ const MyOrders = () => {
     )
 }
 
-export default MyOrders
+export default Notifications
