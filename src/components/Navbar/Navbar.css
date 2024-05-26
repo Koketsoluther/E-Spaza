@@ -49,6 +49,11 @@
 .navbar-search-icon{
     position: relative;
 }
+
+.notification{
+    width: 30px;
+    height: 30px;
+}
 .navbar-search-icon .dot{
     position: absolute;
     min-width: 10px;

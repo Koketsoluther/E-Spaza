@@ -28,7 +28,7 @@ const StoreContextProvider = (props) => {
 
             console.log(stock)
             
-            if(stock == 0){
+            if(stock === 0){
                 console.log("OUT OF STOCK");
                 return
             }
@@ -40,12 +40,12 @@ const StoreContextProvider = (props) => {
         else{
              console.log(stock)
 
-            if(stock == cartItems[itemId] ){
+            if(stock === cartItems[itemId] ){
                 console.log("There isn't more stock...")
                 return
             }
 
-            else if(stock == 0){
+            else if(stock === 0){
                 console.log("OUT OF STOCK");
                 return
             }
@@ -80,7 +80,7 @@ const StoreContextProvider = (props) => {
             console.log(cartItems[item])
             if(cartItems[item]>0){
                 
-                let itemInfo= foodData.find((product)=> product._id == item);
+                let itemInfo= foodData.find((product)=> product._id === item);
                 
                 totalAmount+=itemInfo.PRICE*cartItems[item];
             }

@@ -28,7 +28,7 @@ describe('ProductItem Component', () => {
 
     expect(screen.getByText('Apple')).toBeInTheDocument();
     expect(screen.getByText('R10')).toBeInTheDocument();
-    expect(screen.getByAltText('Apple image')).toHaveAttribute('src', 'http://localhost:4000/images/apple.png');
+    expect(screen.getByAltText('Apple image')).toHaveAttribute('src', 'https://us-central1-e-spazadb.cloudfunctions.net/func/images/apple.png');
   });
 
   test('renders add icon when item is not in cart', () => {
