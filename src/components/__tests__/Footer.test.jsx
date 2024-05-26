@@ -5,7 +5,7 @@ import { assets } from '../Assets/assets';
 
 describe('Footer', () => {
   test('renders the footer component', () => {
-    render(<Footer />);
+    render(<Footer/>);
     const footerElement = screen.getByTestId('footer');
     expect(footerElement).toBeInTheDocument();
   });

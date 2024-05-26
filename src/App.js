@@ -7,6 +7,7 @@ import Cart from './pages/Cart/Cart';
 import Footer from './components/Footer/Footer';
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
 import MyOrders from './pages/MyOrders/MyOrders';
+import Notifications from './pages/notifications/notifications';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/order' element={<PlaceOrder/>}/>
           <Route path='/myorders' element={<MyOrders/>}/>
+          <Route path='/notifications' element= {<Notifications/>}/>
         </Routes>
 
       </div>

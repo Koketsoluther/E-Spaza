@@ -66,7 +66,7 @@ describe('PlaceOrder', () => {
     fireEvent.click(placeOrderButton);
 
     
-      expect(axios.post).toHaveBeenCalledWith('http://localhost:4000/api/order/place', {
+      expect(axios.post).toHaveBeenCalledWith('https://us-central1-e-spazadb.cloudfunctions.net/func/api/order/place', {
         ADDRESS: {
           firstName: 'John',
           lastName: 'Doe',

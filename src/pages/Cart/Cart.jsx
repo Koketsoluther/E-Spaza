@@ -29,7 +29,7 @@ const Cart=() =>{
                         return(
                             <div>
                                 <div className="cart-items-title cart-items-item">
-                                <img src={"http://localhost:4000/images/"+item.IMAGE} alt="" />
+                                <img src={"https://us-central1-e-spazadb.cloudfunctions.net/func/images/"+item.IMAGE} alt="" />
                                 <p>{item.NAME}</p>
                                 <p>R{item.PRICE}</p>
                                 <p>{cartItems[item._id]}</p>

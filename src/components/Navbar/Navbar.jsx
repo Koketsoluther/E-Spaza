@@ -24,9 +24,10 @@ const Navbar=()=>{
 
             </ul>
             <section className="navbar-right">
-                <img src={assets.search_icon} alt="/search icon/i" />
+                <Link to='/notifications'><img className="notification" src={assets.bell} alt=""/></Link>
                 <div className="navbar-search-icon">
                     <Link to='/cart'><img src={assets.basket_icon} alt="/basket icon/i"/></Link>
+    
                     <div data-testid="cart-dot"  className={getTotalCartAmount()===0?"":"dot"}></div>
                 </div>
  

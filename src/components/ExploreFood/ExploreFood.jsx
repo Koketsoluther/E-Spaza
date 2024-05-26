@@ -10,7 +10,7 @@ const ExploreFood = () => {
     useEffect(() => {
         const fetchFoodData = async () => {
             try {
-                const response = await fetch('https://us-central1-e-spazadb.cloudfunctions.net/app/api/items');
+                const response = await fetch('https://us-central1-e-spazadb.cloudfunctions.net/func/api/products/list');
                 if (!response) {
                     throw new Error('No response received');
                 }

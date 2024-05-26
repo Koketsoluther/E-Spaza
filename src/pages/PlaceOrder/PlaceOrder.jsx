@@ -39,6 +39,7 @@ const PlaceOrder=()=>{
                 let itemInfo = item;
                 itemInfo["quantity"] = cartItems[item._id]
                 orderItems.push(itemInfo)
+                cartItems[item._id] = 0
             }
             
         })
@@ -51,7 +52,7 @@ const PlaceOrder=()=>{
         }
 
         if(isAuthenticated){
-            let res = axios.post("http://localhost:4000/api/order/place",orderData)
+            let res = axios.post("https://us-central1-e-spazadb.cloudfunctions.net/func/api/order/place",orderData)
             console.log(res.data)
         }
 

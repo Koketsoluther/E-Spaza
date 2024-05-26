@@ -35,7 +35,7 @@ test('renders MyOrders with orders when authenticated', async () => {
     user: userMock,
   });
 
-  mockAxios.onPost('http://localhost:4000/api/order/userorders').reply(200, {
+  mockAxios.onPost('https://us-central1-e-spazadb.cloudfunctions.net/func/api/order/userorders').reply(200, {
     success: true,
     data: ordersMockData,
   });
